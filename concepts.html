@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NVIDIA AI Ecosystem - Learning Pathways</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #2c3e50;
+            overflow-x: auto;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .main-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .pathway-container {
+            display: flex;
+            min-height: 800px;
+        }
+
+        .pathway-column {
+            flex: 1;
+            padding: 30px 20px;
+            border-right: 2px solid #ecf0f1;
+            position: relative;
+        }
+
+        .pathway-column:last-child {
+            border-right: none;
+        }
+
+        .column-header {
+            background: linear-gradient(135deg, #3498db, #5dade2);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        .user-type {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 2px solid #bdc3c7;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #2c3e50;
+        }
+
+        .user-type:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-color: #3498db;
+        }
+
+        .user-type.novice {
+            background: linear-gradient(135deg, #ffeef7, #f8d7da);
+            border-color: #f1c0e8;
+        }
+
+        .user-type.experienced {
+            background: linear-gradient(135deg, #e8f5e8, #d4edda);
+            border-color: #c3e6cb;
+        }
+
+        .skill-level {
+            background: linear-gradient(135deg, #7fb3d3, #5dade2);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 0.9em;
+        }
+
+        .platform-section {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border: 2px solid #3b82f6;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 600;
+            color: #1e40af;
+        }
+
+        .course-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85em;
+            line-height: 1.3;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .course-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .course-item.intro {
+            background: linear-gradient(135deg, #d4f6cc, #c8e6c0);
+            border-color: #27ae60;
+            color: #1e7e34;
+        }
+
+        .course-item.intermediate {
+            background: linear-gradient(135deg, #fff3cd, #ffeaa7);
+            border-color: #f39c12;
+            color: #856404;
+        }
+
+        .course-item.advanced {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            border-color: #e74c3c;
+            color: #721c24;
+        }
+
+        .connection-line {
+            position: absolute;
+            width: 2px;
+            background: linear-gradient(180deg, #3498db, #2980b9);
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0.6;
+            animation: pulse 3s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        .info-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .modal-description {
+            line-height: 1.6;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .close-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #2980b9;
+        }
+
+        .legend {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 15px;
+            border: 2px solid #3498db;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            font-size: 0.8em;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .pathway-container {
+                flex-direction: column;
+            }
+            
+            .pathway-column {
+                border-right: none;
+                border-bottom: 2px solid #ecf0f1;
+            }
+
+            .main-title {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">ระบบนิเวศ NVIDIA AI</h1>
+            <p class="subtitle">เส้นทางการเรียนรู้เทคโนโลยี AI และ HPC สำหรับผู้เชี่ยวชาญระดับต่างๆ</p>
+        </div>
+
+        <div class="pathway-container">
+            <!-- Researchers Column -->
+            <div class="pathway-column">
+                <div class="column-header">นักวิจัย</div>
+                
+                <div class="user-type novice" data-info="novice-researcher">
+                    ผู้ใช้งานระดับเริ่มต้น<br>
+                    <small>ไม่มีประสบการณ์ HPC</small>
+                </div>
+                
+                <div class="user-type experienced" data-info="experienced-researcher">
+                    ผู้ใช้งานมีประสบการณ์<br>
+                    <small>มีพื้นฐาน HPC</small>
+                </div>
+
+                <div class="skill-level">ทักษะ HPC Carpentry</div>
+
+                <div class="platform-section">การใช้งานบน ARCHER2</div>
+
+                <div class="course-item intro" data-info="cuda-intro">
+                    เบื้องต้น CUDA Programming</div>
+
+                <div class="course-item intro" data-info="ai-frameworks">
+                    การใช้งาน AI Frameworks<br>
+                    <small>(TensorFlow, PyTorch)</small>
+                </div>
+
+                <div class="course-item intermediate" data-info="performance-optimization">
+                    การเพิ่มประสิทธิภาพ<br>
+                    <small>ReFrame & Profiling</small>
+                </div>
+
+                <div class="course-item advanced" data-info="containers">
+                    การใช้งาน Containers<br>
+                    <small>สำหรับ Reproducible Computing</small>
+                </div>
+
+                <div class="course-item advanced" data-info="green-computing">
+                    Green Software on HPC<br>
+                    <small>การประมวลผลอย่างยั่งยืน</small>
+                </div>
+            </div>
+
+            <!-- Data Science Column -->
+            <div class="pathway-column">
+                <div class="column-header">นักวิทยาศาสตร์ข้อมูล</div>
+                
+                <div class="user-type novice" data-info="data-scientist">
+                    นักวิทยาศาสตร์ข้อมูล<br>
+                    <small>เริ่มต้นใช้ HPC</small>
+                </div>
+
+                <div class="skill-level">ทักษะ Data Carpentry</div>
+
+                <div class="platform-section">การวิเคราะห์ข้อมูลบน ARCHER2</div>
+
+                <div class="course-item intro" data-info="python-data">
+                    การวิเคราะห์ข้อมูลด้วย Python<br>
+                    <small>และการแสดงผล</small>
+                </div>
+
+                <div class="course-item intermediate" data-info="machine-learning">
+                    เบื้องต้น Data Science<br>
+                    <small>& Machine Learning</small>
+                </div>
+
+                <div class="course-item advanced" data-info="reproducible-research">
+                    Reproducible Research<br>
+                    <small>ด้วย Containers</small>
+                </div>
+            </div>
+
+            <!-- Developers Column -->
+            <div class="pathway-column">
+                <div class="column-header">นักพัฒนา / RSEs</div>
+                
+                <div class="user-type novice" data-info="novice-dev">
+                    นักพัฒนาเริ่มต้น<br>
+                    <small>ไม่มีประสบการณ์ HPC</small>
+                </div>
+                
+                <div class="user-type novice" data-info="novice-dev-hpc">
+                    นักพัฒนา<br>
+                    <small>มีพื้นฐาน HPC</small>
+                </div>
+                
+                <div class="user-type experienced" data-info="experienced-dev">
+                    นักพัฒนาเชี่ยวชาญ<br>
+                    <small>มีประสบการณ์ HPC</small>
+                </div>
+
+                <div class="skill-level">Software Carpentry</div>
+                <div class="skill-level">HPC Carpentry</div>
+
+                <div class="platform-section">การพัฒนาบน ARCHER2</div>
+
+                <div class="course-item intro" data-info="modern-fortran">
+                    เบื้องต้น Modern Fortran</div>
+
+                <div class="course-item intro" data-info="parallel-io">
+                    Efficient Parallel I/O</div>
+
+                <div class="course-item intermediate" data-info="openmp">
+                    Shared Memory Programming<br>
+                    <small>ด้วย OpenMP</small>
+                </div>
+
+                <div class="course-item intermediate" data-info="cpp-scientists">
+                    Modern C++ สำหรับ<br>
+                    <small>Computational Scientists</small>
+                </div>
+
+                <div class="course-item intermediate" data-info="fortran-intermediate">
+                    Intermediate Modern Fortran</div>
+
+                <div class="course-item intermediate" data-info="mpi-programming">
+                    Message Passing<br>
+                    <small>Programming ด้วย MPI</small>
+                </div>
+
+                <div class="course-item intermediate" data-info="mpi-advanced">
+                    Advanced MPI</div>
+
+                <div class="course-item advanced" data-info="gpu-hip">
+                    GPU Programming ด้วย HIP</div>
+
+                <div class="course-item advanced" data-info="gpu-directives">
+                    GPU Programming<br>
+                    <small>ด้วย Directives</small>
+                </div>
+
+                <div class="course-item advanced" data-info="openmp-advanced">
+                    Advanced OpenMP</div>
+
+                <div class="course-item advanced" data-info="performance-analysis">
+                    Parallel Performance<br>
+                    <small>Analysis ด้วย Scalasca</small>
+                </div>
+
+                <div class="course-item advanced" data-info="cray-optimization">
+                    การใช้งาน HPE Cray EX<br>
+                    <small>Supercomputer อย่างมีประสิทธิภาพ</small>
+                </div>
+
+                <div class="course-item advanced" data-info="node-optimization">
+                    Single Node Performance<br>
+                    <small>Optimisation</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Legend -->
+    <div class="legend">
+        <div class="legend-item">
+            <div class="legend-color" style="background: linear-gradient(135deg, #d4f6cc, #c8e6c0);"></div>
+            <span>เบื้องต้น</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: linear-gradient(135deg, #fff3cd, #ffeaa7);"></div>
+            <span>ระดับกลาง</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: linear-gradient(135deg, #f8d7da, #f5c6cb);"></div>
+            <span>ระดับสูง</span>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div class="info-modal" id="infoModal">
+        <div class="modal-content">
+            <div class="modal-title" id="modalTitle">หัวข้อ</div>
+            <div class="modal-description" id="modalDescription">คำอธิบาย</div>
+            <button class="close-btn" onclick="closeModal()">ปิด</button>
+        </div>
+    </div>
+
+    <script>
+        const courseInfo = {
+            "novice-researcher": {
+                title: "นักวิจัยระดับเริ่มต้น",
+                description: "เหมาะสำหรับนักวิจัยที่ต้องการเริ่มต้นใช้งาน AI และ HPC โดยไม่มีประสบการณ์ก่อนหน้า จะได้เรียนรู้พื้นฐานการใช้งานเครื่องมือและแพลตฟอร์มต่างๆ"
+            },
+            "experienced-researcher": {
+                title: "นักวิจัยที่มีประสบการณ์",
+                description: "สำหรับนักวิจัยที่มีพื้นฐาน HPC แล้ว และต้องการพัฒนาทักษะให้ลึกซึ้งยิ่งขึ้น เน้นการใช้งาน AI frameworks และเทคนิคขั้นสูง"
+            },
+            "data-scientist": {
+                title: "นักวิทยาศาสตร์ข้อมูล",
+                description: "เหมาะสำหรับผู้ที่ทำงานด้านการวิเคราะห์ข้อมูลและต้องการใช้ HPC ในการประมวลผลข้อมูลขนาดใหญ่และ machine learning"
+            },
+            "novice-dev": {
+                title: "นักพัฒนาเริ่มต้น",
+                description: "สำหรับนักพัฒนาซอฟต์แวร์ที่เพิ่งเริ่มต้นเข้าสู่โลก HPC จะได้เรียนรู้พื้นฐานการเขียนโปรแกรมแบบขนาน"
+            },
+            "novice-dev-hpc": {
+                title: "นักพัฒนาที่มีพื้นฐาน HPC",
+                description: "สำหรับนักพัฒนาที่มีพื้นฐาน HPC แล้ว และต้องการพัฒนาทักษะเฉพาะด้าน"
+            },
+            "experienced-dev": {
+                title: "นักพัฒนาเชี่ยวชาญ",
+                description: "สำหรับนักพัฒนาที่มีประสบการณ์สูง และต้องการเรียนรู้เทคนิคขั้นสูงใน HPC และ GPU programming"
+            },
+            "cuda-intro": {
+                title: "เบื้องต้น CUDA Programming",
+                description: "เรียนรู้พื้นฐานการเขียนโปรแกรมด้วย CUDA เพื่อใช้งาน GPU ของ NVIDIA ในงานประมวลผลแบบขนาน รวมถึงการเข้าใจ memory hierarchy และการเพิ่มประสิทธิภาพ"
+            },
+            "ai-frameworks": {
+                title: "การใช้งาน AI Frameworks",
+                description: "เรียนรู้การใช้งาน TensorFlow และ PyTorch บน HPC systems เพื่อการฝึกโมเดล AI ขนาดใหญ่ และการใช้งาน distributed training"
+            },
+            "performance-optimization": {
+                title: "การเพิ่มประสิทธิภาพด้วย ReFrame",
+                description: "เรียนรู้การใช้เครื่องมือ ReFrame สำหรับการทดสอบประสิทธิภาพและ benchmarking รวมถึงการ profiling เพื่อหาจุดคอขวด"
+            },
+            "containers": {
+                title: "Reproducible Computing ด้วย Containers",
+                description: "เรียนรู้การใช้งาน Singularity/Apptainer containers เพื่อสร้างสภาพแวดล้อมที่สามารถทำซ้ำได้ในงานวิจัยและการประมวลผล"
+            },
+            "green-computing": {
+                title: "Green Software on HPC",
+                description: "เรียนรู้แนวทางการพัฒนาซอฟต์แวร์ที่เป็นมิตรต่อสิ่งแวดล้อม การลดการใช้พลังงานในการประมวลผล และการคำนวณ carbon footprint"
+            },
+            "python-data": {
+                title: "การวิเคราะห์ข้อมูลด้วย Python",
+                description: "เรียนรู้การใช้ Python libraries เช่น NumPy, Pandas, และ Matplotlib บน HPC สำหรับการวิเคราะห์ข้อมูลขนาดใหญ่และการแสดงผล"
+            },
+            "machine-learning": {
+                title: "Data Science & Machine Learning",
+                description: "เรียนรู้พื้นฐาน machine learning algorithms, การเตรียมข้อมูล, และการประเมินผลโมเดล โดยใช้ scikit-learn และเครื่องมืออื่นๆ"
+            },
+            "reproducible-research": {
+                title: "Reproducible Research",
+                description: "เรียนรู้หลักการและเครื่องมือสำหรับการทำวิจัยที่สามารถทำซ้ำได้ รวมถึงการใช้ version control และ containers"
+            },
+            "modern-fortran": {
+                title: "Modern Fortran",
+                description: "เรียนรู้ Fortran ยุคใหม่ (Fortran 2008+) พร้อมฟีเจอร์ที่ทันสมัย object-oriented programming และ coarray สำหรับ parallel computing"
+            },
+            "parallel-io": {
+                title: "Efficient Parallel I/O",
+                description: "เรียนรู้เทคนิคการอ่าน/เขียนไฟล์แบบขนานที่มีประสิทธิภาพ ใช้งาน HDF5, NetCDF และ parallel file systems"
+            },
+            "openmp": {
+                title: "Shared Memory Programming ด้วย OpenMP",
+                description: "เรียนรู้การเขียนโปรแกรมแบบขนานบน shared memory systems ด้วย OpenMP รวมถึงการ synchronization และ load balancing"
+            },
+            "cpp-scientists": {
+                title: "Modern C++ สำหรับ Computational Scientists",
+                description: "เรียนรู้ C++11/14/17/20 features ที่เป็นประโยชน์สำหรับงาน scientific computing รวมถึง templates และ STL"
+            },
+            "mpi-programming": {
+                title: "Message Passing Programming ด้วย MPI",
+                description: "เรียนรู้การเขียนโปรแกรมแบบขนานด้วย MPI (Message Passing Interface) สำหรับ distributed memory systems"
+            },
+            "gpu-hip": {
+                title: "GPU Programming ด้วย HIP",
+                description: "เรียนรู้การเขียนโปรแกรม GPU ด้วย HIP (Heterogeneous-compute Interface for Portability) ที่ทำงานได้ทั้ง AMD และ NVIDIA"
+            },
+            "performance-analysis": {
+                title: "Parallel Performance Analysis",
+                description: "เรียนรู้การวิเคราะห์ประสิทธิภาพของโปรแกรมแบบขนานด้วยเครื่องมือ Scalasca และการหาจุดคอขวด"
+            }
+        };
+
+        function showModal(info) {
+            const modal = document.getElementById('infoModal');
+            const title = document.getElementById('modalTitle');
+            const description = document.getElementById('modalDescription');
+            
+            title.textContent = info.title;
+            description.textContent = info.description;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+        }
+
+        // Add click event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const clickableElements = document.querySelectorAll('[data-info]');
+            
+            clickableElements.forEach(element => {
+                element.addEventListener('click', function() {
+                    const infoKey = this.getAttribute('data-info');
+                    const info = courseInfo[infoKey];
+                    
+                    if (info) {
+                        showModal(info);
+                    }
+                });
+            });
+
+            // Close modal when clicking outside
+            document.getElementById('infoModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
