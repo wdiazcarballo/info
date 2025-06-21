@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10+ เคล็ดลับสู่การใช้ HPC อย่างมีประสิทธิภาพ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        .flowchart-box {
+            border: 2px solid #00A6A6;
+            background-color: #F0FDFA;
+        }
+        .flowchart-arrow {
+            color: #753A88;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <header class="bg-[#00A6A6] text-white text-center py-12 px-4">
+        <h1 class="text-4xl md:text-5xl font-bold mb-2">เคล็ดลับสู่การใช้ HPC อย่างเซียน</h1>
+        <p class="text-lg md:text-xl max-w-3xl mx-auto">คู่มือฉบับสมบูรณ์เพื่อการใช้งาน High-Performance Computing (HPC) ให้เต็มศักยภาพ</p>
+    </header>
+
+    <main>
+        <section id="foundation" class="py-16 px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#753A88]">รากฐานสำคัญ: แหล่งข้อมูลและการเรียนรู้</h2>
+                <p class="mt-2 text-lg text-gray-600">เริ่มต้นอย่างมั่นคงด้วยการใช้ประโยชน์จากทรัพยากรที่มีอยู่รอบตัวคุณ</p>
+            </div>
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">🤝</div>
+                    <h3 class="text-xl font-bold mb-2 text-[#753A88]">1. อย่าสู้เพียงลำพัง</h3>
+                    <p class="text-gray-600">เมื่อเจอปัญหา อย่าลังเลที่จะขอความช่วยเหลือจากช่องทางต่างๆ ทั้ง Service Desk, วิศวกรซอฟต์แวร์วิจัย (RSEs) หรือชุมชนผู้ใช้งานออนไลน์</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">📚</div>
+                    <h3 class="text-xl font-bold mb-2 text-[#753A88]">2. อ่านเอกสารประกอบ</h3>
+                    <p class="text-gray-600">เอกสารประกอบ (Documentation) คือขุมทรัพย์ความรู้ที่ตอบคำถามส่วนใหญ่ได้ ช่วยให้คุณแก้ปัญหาได้เร็วขึ้นโดยไม่ต้องรอ</p>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6 text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-5xl mb-4">🎓</div>
+                    <h3 class="text-xl font-bold mb-2 text-[#753A88]">3. ใช้ประโยชน์จากคอร์สฝึกอบรม</h3>
+                    <p class="text-gray-600">มีหลักสูตรออนไลน์มากมายจาก Archer2, The Carpentries และ CodeRefinery ที่จะช่วยเพิ่มพูนทักษะการใช้ HPC ของคุณ</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="toolkit" class="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#D9328E]">เครื่องมือคู่ใจ: ทักษะที่ขาดไม่ได้</h2>
+                <p class="mt-2 text-lg text-gray-600">ฝึกฝนเครื่องมือพื้นฐานให้เชี่ยวชาญ เพื่อการทำงานที่คล่องตัวบนระบบ HPC</p>
+            </div>
+            <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
+                    <div class="flex items-center">
+                        <div class="text-5xl mr-6">📝</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-1 text-[#D9328E]">โปรแกรมแก้ไขข้อความ</h3>
+                            <p class="text-gray-600">เรียนรู้การใช้ Text Editor บนเทอร์มินัล เช่น <span class="font-mono bg-gray-200 px-2 py-1 rounded">Nano</span>, <span class="font-mono bg-gray-200 px-2 py-1 rounded">Vim</span>, หรือ <span class="font-mono bg-gray-200 px-2 py-1 rounded">Emacs</span> เพื่อแก้ไขไฟล์ได้อย่างรวดเร็วโดยไม่ต้องโอนย้ายไฟล์</p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="bg-white rounded-xl shadow-lg p-8 transform hover:scale-105 transition-transform duration-300">
+                    <div class="flex items-center">
+                        <div class="text-5xl mr-6 font-mono text-green-500">>_</div>
+                        <div>
+                            <h3 class="text-xl font-bold mb-1 text-[#D9328E]">Linux Command Line</h3>
+                            <p class="text-gray-600">ทำความคุ้นเคยกับคำสั่ง Linux ทั้งพื้นฐานและขั้นสูง เพื่อควบคุมและจัดการงานของคุณบน HPC ได้อย่างเต็มประสิทธิภาพ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="execution" class="py-16 px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#00A6A6]">การรันงานอย่างชาญฉลาด</h2>
+                <p class="mt-2 text-lg text-gray-600">ประหยัดเวลาและทรัพยากรอันมีค่าด้วยเทคนิคการรันงานที่ถูกต้อง</p>
+            </div>
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <div class="text-5xl text-center mb-4">🧪</div>
+                    <h3 class="text-xl font-bold text-center mb-2 text-[#00A6A6]">รันงานทดสอบขนาดเล็กเสมอ</h3>
+                    <p class="text-gray-600 text-center">ก่อนรันงานขนาดใหญ่เต็มรูปแบบ ให้รันงานทดสอบขนาดเล็ก (Test Job) เพื่อตรวจสอบข้อผิดพลาดง่ายๆ เช่น การพิมพ์ผิดในสคริปต์ ซึ่งจะช่วยป้องกันการเสียเวลารอคิวโดยเปล่าประโยชน์</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h3 class="text-xl font-bold text-center mb-4 text-[#00A6A6]">ทำการทดสอบประสิทธิภาพ (Benchmarking)</h3>
+                    <div class="chart-container">
+                        <canvas id="benchmarkingChart"></canvas>
+                    </div>
+                    <p class="text-gray-600 mt-4 text-center">ทดสอบรันโค้ดของคุณด้วยการตั้งค่าที่แตกต่างกัน (เช่น จำนวนเธรด) เพื่อหาจุดที่ให้ประสิทธิภาพสูงสุด การลงทุนเวลาเล็กน้อยในตอนนี้ จะช่วยประหยัดเวลาประมวลผลมหาศาลในระยะยาว</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="planning" class="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#F29727]">วางแผนสำหรับอนาคต</h2>
+                <p class="mt-2 text-lg text-gray-600">การออกแบบที่ดีในวันนี้ จะทำให้ชีวิตของคุณและเพื่อนร่วมงานง่ายขึ้นในวันหน้า</p>
+            </div>
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-6xl mb-4">🗃️</div>
+                    <h3 class="text-xl font-bold text-[#F29727]">การจัดการข้อมูล</h3>
+                    <p class="text-gray-600">วางแผนการสำรองข้อมูล การบีบอัด และการจัดเก็บข้อมูลตั้งแต่เนิ่นๆ เพื่อป้องกันข้อมูลสูญหายและจัดการได้อย่างมีประสิทธิภาพ</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-6xl mb-4">💻</div>
+                    <h3 class="text-xl font-bold text-[#F29727]">การออกแบบโค้ด</h3>
+                    <p class="text-gray-600">เขียนโค้ดโดยคำนึงถึงความยืดหยุ่นและการขยายตัวในอนาคต เพื่อหลีกเลี่ยงการแก้ไขครั้งใหญ่ที่ยุ่งยากในภายหลัง</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center transform hover:scale-105 transition-transform duration-300">
+                    <div class="text-6xl mb-4">🤝</div>
+                    <h3 class="text-xl font-bold text-[#F29727]">คิดถึงผู้ร่วมงาน</h3>
+                    <p class="text-gray-600">เขียนโค้ดให้สะอาด อ่านง่าย และตั้งชื่อตัวแปรให้สื่อความหมาย เพื่อให้คนที่มาทำงานต่อจากคุณสามารถเข้าใจได้ไม่ยาก</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="efficiency" class="py-16 px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#753A88]">การพัฒนาอย่างมีประสิทธิภาพ</h2>
+                <p class="mt-2 text-lg text-gray-600">ใช้เครื่องมือที่มีอยู่ให้เป็นประโยชน์ เพื่อเร่งกระบวนการทำงานและวิเคราะห์ผลลัพธ์</p>
+            </div>
+             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                     <h3 class="text-xl font-bold text-center mb-4 text-[#753A88]">อย่าสร้างล้อขึ้นมาใหม่</h3>
+                    <div class="chart-container">
+                        <canvas id="timeSpentChart"></canvas>
+                    </div>
+                    <p class="text-gray-600 mt-4 text-center">ใช้ประโยชน์จากไลบรารีที่ได้รับการปรับแต่งมาอย่างดี เช่น FFTW, BLAS, LAPACK และซอฟต์แวร์ที่ติดตั้งโดยส่วนกลาง แทนการเขียนฟังก์ชันพื้นฐานขึ้นมาใหม่ทั้งหมด ซึ่งช่วยประหยัดเวลาในการพัฒนาได้อย่างมหาศาล</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-8 text-center">
+                    <div class="text-5xl text-center mb-4">📊</div>
+                    <h3 class="text-xl font-bold text-center mb-2 text-[#753A88]">เรียนรู้เครื่องมือวิเคราะห์ข้อมูล</h3>
+                    <p class="text-gray-600">เครื่องมืออย่าง <span class="font-bold">Pandas</span> (Python) และ <span class="font-bold">R</span> มีประโยชน์อย่างยิ่งในการจัดการและดึงข้อมูลสำคัญออกจากผลลัพธ์จำนวนมหาศาลที่คุณสร้างขึ้นบน HPC ทำให้การวิเคราะห์ข้อมูลเป็นเรื่องง่ายและรวดเร็ว</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="bonus" class="bg-gray-100 py-16 px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-[#D9328E]">เคล็ดลับสำหรับมือโปร</h2>
+                <p class="mt-2 text-lg text-gray-600">ข้อควรระวังและแนวคิดเพิ่มเติมเพื่อการใช้งาน HPC ที่สมบูรณ์แบบ</p>
+            </div>
+            <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-lg p-8">
+                <ul class="space-y-4">
+                    <li class="flex items-start"><span class="text-green-500 text-2xl mr-3">✔️</span><span><span class="font-bold">เข้าใจ "กล่องดำ" ของคุณ:</span> รู้ว่าโค้ดและโปรแกรมที่คุณรันกำลังทำอะไรอยู่เบื้องหลัง</span></li>
+                    <li class="flex items-start"><span class="text-red-500 text-2xl mr-3">❌</span><span><span class="font-bold">`sudo` ใช้ไม่ได้:</span> อย่าพยายามใช้คำสั่ง `sudo` บนระบบ HPC เพราะจะถูกปิดการใช้งาน</span></li>
+                    <li class="flex items-start"><span class="text-green-500 text-2xl mr-3">✔️</span><span><span class="font-bold">แสดงผลข้อมูลในเครื่อง:</span> ถ่ายโอนข้อมูลกลับมาแสดงผลแบบกราฟิกบนเครื่องของคุณเองจะเร็วกว่าการทำบน HPC</span></li>
+                    <li class="flex items-start"><span class="text-green-500 text-2xl mr-3">✔️</span><span><span class="font-bold">ระวังค่าใช้จ่าย I/O:</span> การอ่านและเขียนไฟล์ขนาดใหญ่ใช้เวลานาน ควรวางแผนการเข้าถึงข้อมูลให้ดี</span></li>
+                    <li class="flex items-start"><span class="text-green-500 text-2xl mr-3">✔️</span><span><span class="font-bold">เข้าใจผลกระทบของการแก้โค้ด:</span> ก่อนจะเปลี่ยนแปลงอะไร ต้องแน่ใจว่าคุณเข้าใจว่ามันจะส่งผลกระทบต่อส่วนอื่นๆ อย่างไร</span></li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#753A88] text-white text-center p-6 mt-16">
+        <p>&copy; 2025 Infographic for HPC Users. สร้างสรรค์เพื่อการวิจัยที่มีประสิทธิภาพ</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const wrapLabel = (label, maxLength = 16) => {
+                if (label.length <= maxLength) {
+                    return label;
+                }
+                const words = label.split(' ');
+                const lines = [];
+                let currentLine = '';
+                words.forEach(word => {
+                    if ((currentLine + ' ' + word).length > maxLength && currentLine.length > 0) {
+                        lines.push(currentLine);
+                        currentLine = word;
+                    } else {
+                        currentLine += (currentLine.length === 0 ? '' : ' ') + word;
+                    }
+                });
+                lines.push(currentLine);
+                return lines;
+            };
+
+            const tooltipTitleCallback = (tooltipItems) => {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+            
+            const sharedChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#4A5568',
+                            font: {
+                                family: "'Sarabun', sans-serif",
+                                size: 14,
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: tooltipTitleCallback
+                        },
+                        titleFont: { family: "'Sarabun', sans-serif" },
+                        bodyFont: { family: "'Sarabun', sans-serif" }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: { color: '#4A5568', font: { family: "'Sarabun', sans-serif" }},
+                        grid: { color: '#E2E8F0' }
+                    },
+                    x: {
+                        ticks: { color: '#4A5568', font: { family: "'Sarabun', sans-serif" }},
+                        grid: { display: false }
+                    }
+                }
+            };
+
+
+            const createBenchmarkingChart = () => {
+                const ctx = document.getElementById('benchmarkingChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['1 เธรด', '2 เธรด', '4 เธรด (ดีที่สุด)', '8 เธรด'],
+                        datasets: [{
+                            label: 'ประสิทธิภาพ (หน่วย/วัน)',
+                            data: [50, 85, 120, 110],
+                            backgroundColor: [
+                                '#F29727',
+                                '#F29727',
+                                '#00A6A6',
+                                '#F29727'
+                            ],
+                            borderColor: [
+                                '#D68222',
+                                '#D68222',
+                                '#008C8C',
+                                '#D68222'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        ...sharedChartOptions,
+                         scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'ประสิทธิภาพ', color: '#4A5568', font: { family: "'Sarabun', sans-serif" }}
+                            },
+                            x: {
+                                title: { display: true, text: 'จำนวนเธรดที่ใช้', color: '#4A5568', font: { family: "'Sarabun', sans-serif" }}
+                            }
+                        }
+                    }
+                });
+            };
+
+            const createTimeSpentChart = () => {
+                const ctx = document.getElementById('timeSpentChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['เขียนโค้ดเองทั้งหมด', 'ใช้ไลบรารีที่มีอยู่'],
+                        datasets: [{
+                            label: 'เวลาที่ใช้ในการพัฒนา',
+                            data: [85, 15],
+                            backgroundColor: [
+                                '#D9328E',
+                                '#F2E863'
+                            ],
+                            hoverOffset: 4
+                        }]
+                    },
+                     options: {
+                        ...sharedChartOptions,
+                        cutout: '60%',
+                        scales: {
+                            y: { display: false },
+                            x: { display: false }
+                        }
+                    }
+                });
+            };
+
+            createBenchmarkingChart();
+            createTimeSpentChart();
+        });
+    </script>
+</body>
+</html>
